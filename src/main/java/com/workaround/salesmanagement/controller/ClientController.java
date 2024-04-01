@@ -5,7 +5,6 @@
 package com.workaround.salesmanagement.controller;
 
 import com.workaround.salesmanagement.DTO.ClientDTO;
-import com.workaround.salesmanagement.DTO.ProductDTO;
 import com.workaround.salesmanagement.DTO.ResponseDTO;
 import com.workaround.salesmanagement.constants.Endpoints;
 import com.workaround.salesmanagement.service.ClientManagementService;
@@ -31,19 +30,19 @@ public class ClientController {
     private final ClientManagementService clientService;
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
 
-    @PostMapping(value = Endpoints.CREATE_PRODUCT, consumes = JSON, produces = JSON)
-    public ResponseDTO createProduct(@RequestBody ClientDTO request) {
+    @PostMapping(value = Endpoints.CREATE_CLIENT, consumes = JSON, produces = JSON)
+    public ResponseDTO createClient(@RequestBody ClientDTO request) {
         return clientService.createProduct(request);
     }
 
     @GetMapping(value = Endpoints.FETCH_CLIENTS, consumes = JSON, produces = JSON)
-    public ResponseDTO fetchAllProducts(@RequestParam(defaultValue = "0") int page,
+    public ResponseDTO fetchAllClients(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size) {
         return clientService.fetchAllCustomers(page, size);
     }
 
-    @PostMapping(value = Endpoints.UPDATE_PRODUCT, consumes = JSON, produces = JSON)
-    public ResponseDTO createProduct(@PathVariable(name = "clientId", required = true) long clientId,
+    @PostMapping(value = Endpoints.UPDATE_CLIENT consumes = JSON, produces = JSON)
+    public ResponseDTO updateClient(@PathVariable(name = "clientId", required = true) long clientId,
             @RequestBody ClientDTO request) {
         return clientService.updateClient(request, clientId);
     }
