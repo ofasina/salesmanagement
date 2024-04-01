@@ -32,7 +32,7 @@ public class ClientController {
 
     @PostMapping(value = Endpoints.CREATE_CLIENT, consumes = JSON, produces = JSON)
     public ResponseDTO createClient(@RequestBody ClientDTO request) {
-        return clientService.createProduct(request);
+        return clientService.createClient(request);
     }
 
     @GetMapping(value = Endpoints.FETCH_CLIENTS, consumes = JSON, produces = JSON)
