@@ -26,7 +26,7 @@ public class ClientManagementService {
 
     private final ClientRepository clientRepository;
 
-    public ResponseDTO createProduct(ClientDTO request) {
+    public ResponseDTO createClient(ClientDTO request) {
         try {
             // check that no clent exist with same email or phone number;
             Optional<Clients> existingClient

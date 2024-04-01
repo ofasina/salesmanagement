@@ -36,7 +36,7 @@ public class ProductController {
         return productService.createProduct(request);
     }
 
-    @GetMapping(value = Endpoints.FETCH_CLIENTS, consumes = JSON, produces = JSON)
+    @GetMapping(value = Endpoints.FETCH_PRODUCT, consumes = JSON, produces = JSON)
     public ResponseDTO fetchAllProducts(@RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size) {
         return productService.fetchProducts(page, size);

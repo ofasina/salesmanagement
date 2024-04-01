@@ -32,7 +32,7 @@ public class ClientController {
 
     @PostMapping(value = Endpoints.CREATE_CLIENT, consumes = JSON, produces = JSON)
     public ResponseDTO createClient(@RequestBody ClientDTO request) {
-        return clientService.createProduct(request);
+        return clientService.createClient(request);
     }
 
     @GetMapping(value = Endpoints.FETCH_CLIENTS, consumes = JSON, produces = JSON)
@@ -41,7 +41,7 @@ public class ClientController {
         return clientService.fetchAllCustomers(page, size);
     }
 
-    @PostMapping(value = Endpoints.UPDATE_CLIENT consumes = JSON, produces = JSON)
+    @PostMapping(value = Endpoints.UPDATE_CLIENT, consumes = JSON, produces = JSON)
     public ResponseDTO updateClient(@PathVariable(name = "clientId", required = true) long clientId,
             @RequestBody ClientDTO request) {
         return clientService.updateClient(request, clientId);
