@@ -21,6 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +35,7 @@ public class ProductManagementService {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepo;
 
-    public ResponseDTO createProduct(ProductDTO request) {
+    public ResponseDTO createProduct(ProductDTO request, Authentication auth) {
         try {
             Products newProduct = new Products();
             newProduct.setCategory(request.getCategory());
@@ -44,6 +45,7 @@ public class ProductManagementService {
             newProduct.setName(request.getName());
             newProduct.setPrice(request.getPrice());
             newProduct.setQuantity(request.getQuantity());
+            newProduct.setCreatedBy(auth.getName());
             productRepository.save(newProduct);
             return new ResponseDTO(HttpStatus.CREATED.toString(), "Created", newProduct);
 
@@ -75,7 +77,7 @@ public class ProductManagementService {
         try {
             if (createdDate != null) {
                 //check if record exist for the date
-                List<Products> productsByDate = productRepository.findByCreatedDate(createdDate);
+                List<Products> productsByDate = productRepository.findByCreatedAt(createdDate);
                 return new ResponseDTO(HttpStatus.OK.toString(), "Ok",
                         productsByDate.isEmpty() ? "No record for selected date found" : productsByDate);
             }

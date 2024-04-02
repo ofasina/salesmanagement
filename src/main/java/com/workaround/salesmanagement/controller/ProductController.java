@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,8 +35,8 @@ public class ProductController {
 
     @PostMapping(value = Endpoints.CREATE_PRODUCT, consumes = JSON, produces = JSON)
     @PreAuthorize("Admin Role")
-    public ResponseDTO createProduct(@RequestBody ProductDTO request) {
-        return productService.createProduct(request);
+    public ResponseDTO createProduct(@RequestBody ProductDTO request, Authentication auth) {
+        return productService.createProduct(request, auth);
     }
 
     @GetMapping(value = Endpoints.FETCH_PRODUCT, consumes = JSON, produces = JSON)

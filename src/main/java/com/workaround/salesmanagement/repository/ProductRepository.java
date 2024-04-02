@@ -22,5 +22,5 @@ public interface ProductRepository extends JpaRepository <Products, Long>{
     
     Optional<Products> findByDescription (String description);
     
-    List<Products> findByCreatedDate (LocalDate date);
+    List<Products> findByCreatedAt (LocalDate date);
 }
