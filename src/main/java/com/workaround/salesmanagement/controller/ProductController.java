@@ -40,8 +40,8 @@ public class ProductController {
         return productService.createProduct(request, auth);
     }
     
-     @PostMapping(value = Endpoints.CREATE_PRODUCT, consumes = JSON, produces = JSON)
-    @PreAuthorize("hasAnyRole('Admin Role')")
+     @PostMapping(value = Endpoints.CREATE_PRODUCT_CATEGORY, consumes = JSON, produces = JSON)
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseDTO createProductCategory(@RequestBody ProductCategoryDTO request, Authentication auth) {
         return productService.createProductCategory(request);
     }
