@@ -46,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping(value = Endpoints.UPDATE_PRODUCT, consumes = JSON, produces = JSON)
-    public ResponseDTO createProduct(@PathVariable(name = "productId", required = true) long productId,
+    public ResponseDTO updateProduct(@PathVariable(name = "productId", required = true) long productId,
             @RequestBody ProductDTO request) {
         return productService.updateProduct(request, productId);
     }
