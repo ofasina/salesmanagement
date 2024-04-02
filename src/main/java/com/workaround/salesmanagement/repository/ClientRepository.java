@@ -5,6 +5,7 @@
 package com.workaround.salesmanagement.repository;
 
 import com.workaround.salesmanagement.model.Clients;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,6 +16,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ClientRepository extends JpaRepository <Clients, Long>{
     
     Optional<Clients> findByEmail(String email);
+    
+    List<Clients> findByFirstName(String name);
+    
+    List<Clients> findByLastName(String name);
+    
+    List<Clients> findByAddress(String address);
     
     Optional<Clients> findByMobile(String mobile);
     

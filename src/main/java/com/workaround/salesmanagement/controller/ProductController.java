@@ -8,7 +8,9 @@ import com.workaround.salesmanagement.DTO.ProductDTO;
 import com.workaround.salesmanagement.DTO.ResponseDTO;
 import com.workaround.salesmanagement.constants.Endpoints;
 import com.workaround.salesmanagement.service.ProductManagementService;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,5 +48,18 @@ public class ProductController {
     public ResponseDTO createProduct(@PathVariable(name = "productId", required = true) long productId,
             @RequestBody ProductDTO request) {
         return productService.updateProduct(request, productId);
+    }
+    
+    @GetMapping(value = Endpoints.VIEW_PRODUCT, consumes = JSON, produces = JSON)
+    public ResponseDTO viewProducts(@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate createdDate,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "description", required = false) String description,
+            @RequestParam(name = "category", required = false) String category) {
+        return productService.viewProducts(name, description, category, createdDate);
+    }
+    
+     @GetMapping(value = Endpoints.VIEW_PRODUCT_ID, consumes = JSON, produces = JSON)
+    public ResponseDTO fetchAllProducts(@PathVariable(name = "productId", required = true) long productId) {
+        return productService.viewProductById(productId);
     }
 }

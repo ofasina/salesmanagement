@@ -6,7 +6,9 @@ package com.workaround.salesmanagement.service;
 
 import com.workaround.salesmanagement.DTO.ResponseDTO;
 import com.workaround.salesmanagement.DTO.SalesDTO;
+import com.workaround.salesmanagement.DTO.SalesResponseDTO;
 import com.workaround.salesmanagement.DTO.TransactionSale;
+import com.workaround.salesmanagement.model.Clients;
 import com.workaround.salesmanagement.model.Products;
 import com.workaround.salesmanagement.model.Sales;
 import com.workaround.salesmanagement.model.Transactions;
@@ -14,9 +16,14 @@ import com.workaround.salesmanagement.repository.ProductRepository;
 import com.workaround.salesmanagement.repository.SalesRepository;
 import com.workaround.salesmanagement.repository.TransactionRepository;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.text.RandomStringGenerator;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +78,24 @@ public class SalesManagement {
                     sold);
         }catch(Exception e){
              return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(),
+                    null);
+        }
+    }
+    
+    public ResponseDTO fetchAllSales(int page, int size){
+        try {
+            Pageable pagingSort = PageRequest.of(page, size);
+            Page<Sales> list = salesRepo.findAll(pagingSort);
+            if (list == null) {
+                list = Page.empty(pagingSort);
+                return new ResponseDTO(HttpStatus.NOT_FOUND.toString(), "No record Found", null);
+
+            }
+
+            return new ResponseDTO(HttpStatus.OK.toString(), "Sales List", list);
+
+        } catch (Exception e) {
+            return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(),
                     null);
         }
     }

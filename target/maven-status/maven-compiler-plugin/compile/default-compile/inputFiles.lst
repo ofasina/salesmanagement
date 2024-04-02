@@ -21,13 +21,13 @@ C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\DTO\Produ
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\repository\SalesRepository.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\model\ProductCategory.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\repository\ProductRepository.java
-C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\service\GenericService.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\controller\ClientController.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\DTO\ClientDTO.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\constants\Endpoints.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\DTO\AuthDTO.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\service\UserManagementService.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\security\JwtAuthenticationFilter.java
+C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\DTO\SalesResponseDTO.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\repository\TransactionRepository.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\DTO\ProductCategoryDTO.java
 C:\webapp\salesmanagement\src\main\java\com\workaround\salesmanagement\model\Clients.java

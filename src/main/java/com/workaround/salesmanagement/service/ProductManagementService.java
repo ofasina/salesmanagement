@@ -11,7 +11,9 @@ import com.workaround.salesmanagement.model.ProductCategory;
 import com.workaround.salesmanagement.model.Products;
 import com.workaround.salesmanagement.repository.ProductCategoryRepository;
 import com.workaround.salesmanagement.repository.ProductRepository;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -68,6 +70,37 @@ public class ProductManagementService {
         }
     }
 
+    public ResponseDTO viewProducts(String name, String description, String catgeory, LocalDate createdDate) {
+
+        try {
+            if (createdDate != null) {
+                //check if record exist for the date
+                List<Products> productsByDate = productRepository.findByCreatedDate(createdDate);
+                return new ResponseDTO(HttpStatus.OK.toString(), "Ok",
+                        productsByDate.isEmpty() ? "No record for selected date found" : productsByDate);
+            }
+            if (name != null) {
+                Optional<Products> products = productRepository.findByName(name);
+                return new ResponseDTO(HttpStatus.OK.toString(), "Ok",
+                        products.isEmpty() ? "No record found" : products.get());
+            }
+            if (description != null) {
+                Optional<Products> products = productRepository.findByDescription(description);
+                return new ResponseDTO(HttpStatus.OK.toString(), "Ok",
+                        products.isEmpty() ? "No record found" : products.get());
+            }
+            if (catgeory != null) {
+                Optional<Products> products = productRepository.findByCategory(catgeory);
+                return new ResponseDTO(HttpStatus.OK.toString(), "Ok",
+                        products.isEmpty() ? "No record found" : products.get());
+            }
+            return new ResponseDTO(HttpStatus.BAD_REQUEST.toString(), "Bad Request", null);
+        } catch (Exception e) {
+            return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(),
+                    null);
+        }
+    }
+
     public ResponseDTO updateProduct(ProductDTO request, long productId) {
 
         try {
@@ -113,6 +146,20 @@ public class ProductManagementService {
             category.setCreatedAt(LocalDateTime.now());
             productCategoryRepo.save(category);
             return new ResponseDTO(HttpStatus.CREATED.toString(), "Created", category);
+
+        } catch (Exception e) {
+            return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(),
+                    null);
+        }
+    }
+    
+    public ResponseDTO viewProductById(long productId) {
+        try {
+            Optional<Products> product = productRepository.findById(productId);
+            if (product.isEmpty()) {
+                return new ResponseDTO(HttpStatus.NOT_FOUND.toString(), "No Product found", null);
+            }
+            return new ResponseDTO(HttpStatus.OK.toString(), "Ok", product.get());
 
         } catch (Exception e) {
             return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR.toString(), e.getMessage(),

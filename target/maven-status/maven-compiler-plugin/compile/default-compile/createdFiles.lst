@@ -11,7 +11,6 @@ com\workaround\salesmanagement\controller\RoleController.class
 com\workaround\salesmanagement\controller\UserAuthenticationController.class
 com\workaround\salesmanagement\WebSecurityConfig.class
 com\workaround\salesmanagement\service\UserRoleManagementService.class
-com\workaround\salesmanagement\service\GenericService.class
 com\workaround\salesmanagement\DTO\ResponseDTO.class
 com\workaround\salesmanagement\controller\SalesController.class
 com\workaround\salesmanagement\model\Clients.class
@@ -34,6 +33,7 @@ com\workaround\salesmanagement\security\JwtTokenUtil.class
 com\workaround\salesmanagement\service\SalesManagement.class
 com\workaround\salesmanagement\controller\ClientController.class
 com\workaround\salesmanagement\repository\ClientRepository.class
+com\workaround\salesmanagement\DTO\SalesResponseDTO.class
 com\workaround\salesmanagement\model\Transactions.class
 com\workaround\salesmanagement\controller\ReportingController.class
 com\workaround\salesmanagement\DTO\User.class
