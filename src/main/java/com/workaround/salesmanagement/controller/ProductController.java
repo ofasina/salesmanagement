@@ -4,6 +4,7 @@
  */
 package com.workaround.salesmanagement.controller;
 
+import com.workaround.salesmanagement.DTO.ProductCategoryDTO;
 import com.workaround.salesmanagement.DTO.ProductDTO;
 import com.workaround.salesmanagement.DTO.ResponseDTO;
 import com.workaround.salesmanagement.constants.Endpoints;
@@ -34,9 +35,15 @@ public class ProductController {
     private static final String JSON = MediaType.APPLICATION_JSON_VALUE;
 
     @PostMapping(value = Endpoints.CREATE_PRODUCT, consumes = JSON, produces = JSON)
-    @PreAuthorize("Admin Role")
+    @PreAuthorize("hasAnyRole('Admin Role')")
     public ResponseDTO createProduct(@RequestBody ProductDTO request, Authentication auth) {
         return productService.createProduct(request, auth);
+    }
+    
+     @PostMapping(value = Endpoints.CREATE_PRODUCT, consumes = JSON, produces = JSON)
+    @PreAuthorize("hasAnyRole('Admin Role')")
+    public ResponseDTO createProductCategory(@RequestBody ProductCategoryDTO request, Authentication auth) {
+        return productService.createProductCategory(request);
     }
 
     @GetMapping(value = Endpoints.FETCH_PRODUCT, consumes = JSON, produces = JSON)
